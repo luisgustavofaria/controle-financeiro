@@ -8,14 +8,12 @@ const SummaryContainer = styled.section`
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
-	
-	
   gap: 2rem;
   margin-top: -5rem;
 `
 
 const SummaryCard = styled.div`
-	background: ${props => props.theme["gray-600"]};
+	background: ${props => props.variant === "green" ? props.theme["green-700"] : props.theme["gray-600"]};
   border-radius: 6px;
   padding: 2rem;
 	display: flex;
@@ -27,11 +25,8 @@ const SummaryCard = styled.div`
     margin-top: 1rem;
     font-size: 2rem;
   }
-
-	${props => props.variant === "green"`
-    background: ${props.theme["green-700"]}
-  `}
 `
+
 const Card = styled.div`
 	display: flex;
 	align-items: center;
@@ -39,14 +34,10 @@ const Card = styled.div`
 	color: ${props => props.theme["gray-300"]};
 `  
   
-  
-  
-  
-
 export function Summary() {
   return (
     <SummaryContainer>
-      <SummaryCard>
+      <SummaryCard >
         <Card>
           <span>Entradas</span>
           <ArrowCircleUp size={32} color="#00b37e" />

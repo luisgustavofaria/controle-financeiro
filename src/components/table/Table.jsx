@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { SearchForm } from "./SearchForm";
+
 const TransactionsContainer = styled.main`
   width: 100%;
   max-width: 1100px;
@@ -11,6 +13,7 @@ const TransactionsTable = styled.table`
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 0.5rem;
+  margin-top: 1.5rem;
   
   td {
     padding: 1.25rem 2rem;
@@ -33,8 +36,69 @@ const PriceHighlight = styled.span`
 export function Table() {
   return(
     <TransactionsContainer>
+      <SearchForm/>
       <TransactionsTable>
         <tbody>
+          <tr>
+            <td width="50%">Desenvolvimento de site</td>
+            <td>
+              <PriceHighlight variant="income">
+                R$ 12.000,00
+              </PriceHighlight>
+            </td>
+            <td>Venda</td>
+            <td>13/04/2022</td>
+          </tr>
+          <tr>
+            <td width="50%">Hambúrguer</td>
+            <td>
+              <PriceHighlight variant="outcome">
+                -R$ 59,00
+              </PriceHighlight>
+            </td>
+            <td>Alimentação</td>
+            <td>10/04/2022</td>
+          </tr>
+          <tr>
+            <td width="50%">Desenvolvimento de site</td>
+            <td>
+              <PriceHighlight variant="income">
+                R$ 12.000,00
+              </PriceHighlight>
+            </td>
+            <td>Venda</td>
+            <td>13/04/2022</td>
+          </tr>
+          <tr>
+            <td width="50%">Hambúrguer</td>
+            <td>
+              <PriceHighlight variant="outcome">
+                -R$ 59,00
+              </PriceHighlight>
+            </td>
+            <td>Alimentação</td>
+            <td>10/04/2022</td>
+          </tr>
+          <tr>
+            <td width="50%">Desenvolvimento de site</td>
+            <td>
+              <PriceHighlight variant="income">
+                R$ 12.000,00
+              </PriceHighlight>
+            </td>
+            <td>Venda</td>
+            <td>13/04/2022</td>
+          </tr>
+          <tr>
+            <td width="50%">Hambúrguer</td>
+            <td>
+              <PriceHighlight variant="outcome">
+                -R$ 59,00
+              </PriceHighlight>
+            </td>
+            <td>Alimentação</td>
+            <td>10/04/2022</td>
+          </tr>
           <tr>
             <td width="50%">Desenvolvimento de site</td>
             <td>

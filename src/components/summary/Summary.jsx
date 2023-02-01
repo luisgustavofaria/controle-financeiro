@@ -52,7 +52,7 @@ export function Summary() {
           <ArrowCircleDown size={32} color="#f75a68" />
         </Card>
 
-        <strong>R$ 17.400,00</strong>
+        <strong>R$ 5.900,00</strong>
       </SummaryCard>
 
       <SummaryCard variant="green">
@@ -61,7 +61,7 @@ export function Summary() {
           <CurrencyDollar size={32} color="#fff" />
         </Card>
 
-        <strong>R$ 17.400,00</strong>
+        <strong>R$ 11.500,00</strong>
       </SummaryCard>
     </SummaryContainer>
   )

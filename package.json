@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "dev:server": "json-server server.json -p 3000 -w -d 500"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +18,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.1"
   }
 }

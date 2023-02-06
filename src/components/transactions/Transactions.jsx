@@ -34,20 +34,7 @@ const PriceHighlight = styled.span`
   color: ${props => props.variant === "income" ? props.theme["green-300"] : props.theme["red-300"]};
 `
 
-export function Transactions() {
-
-  const [transactions, setTransactions] = useState([]);
-
-  async function loadTransactions() {
-    const response = await fetch('http://localhost:3333/transactions')
-    const data = await response.json()
-
-    setTransactions(data)
-  }
-
-  useEffect(() => {
-    loadTransactions()
-  }, []);
+export function Transactions({transactions}) {
 
   return(
     <TransactionsContainer>

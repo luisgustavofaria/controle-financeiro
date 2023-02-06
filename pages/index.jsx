@@ -1,13 +1,13 @@
 import { Header } from "../src/components/header/Header";
 import { Summary } from "../src/components/summary/Summary";
-import { Table } from "../src/components/table/Table";
+import { Transactions } from "../src/components/transactions/Transactions";
 
 export default function HomePage(){
 	return (
 		<div>
 			<Header/>
 			<Summary/>
-      		<Table/>
+      <Transactions/>
 		</div>
     )
 }

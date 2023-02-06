@@ -34,7 +34,7 @@ const PriceHighlight = styled.span`
   color: ${props => props.variant === "income" ? props.theme["green-300"] : props.theme["red-300"]};
 `
 
-export function Table() {
+export function Transactions() {
 
   const [transactions, setTransactions] = useState([]);
 

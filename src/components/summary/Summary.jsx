@@ -1,5 +1,7 @@
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from "phosphor-react";
 import styled from "styled-components";
+import { useContext } from "react";
+import { TransactionsContext } from "../../contexts/TransactionsContext";
 
 
 const SummaryContainer = styled.section`
@@ -34,7 +36,9 @@ const Card = styled.div`
 	color: ${props => props.theme["gray-300"]};
 `  
   
-export function Summary({transactions}) {
+export function Summary() {
+
+  const { transactions } = useContext(TransactionsContext)
 
   const summary = transactions.reduce(
     (acc, transaction) => {

@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 
+import { TransactionsContext } from "../../contexts/TransactionsContext";
 import { SearchForm } from "./SearchForm";
 
 const TransactionsContainer = styled.main`
@@ -34,7 +35,9 @@ const PriceHighlight = styled.span`
   color: ${props => props.variant === "income" ? props.theme["green-300"] : props.theme["red-300"]};
 `
 
-export function Transactions({transactions}) {
+export function Transactions() {
+
+  const { transactions } = useContext(TransactionsContext)
 
   return(
     <TransactionsContainer>

@@ -1,9 +1,8 @@
-import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from "phosphor-react";
-import styled from "styled-components";
-import { useContext } from "react";
-import { TransactionsContext } from "../../contexts/TransactionsContext";
-import { priceFormatter } from "../../utils/Formatter";
-
+import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
+import styled from 'styled-components'
+import { useContext } from 'react'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
+import { priceFormatter } from '../../utils/Formatter'
 
 const SummaryContainer = styled.section`
   width: 100%;
@@ -16,14 +15,17 @@ const SummaryContainer = styled.section`
 `
 
 const SummaryCard = styled.div`
-	background: ${props => props.variant === "green" ? props.theme["green-700"] : props.theme["gray-600"]};
+  background: ${(props) =>
+    props.variant === 'green'
+      ? props.theme['green-700']
+      : props.theme['gray-600']};
   border-radius: 6px;
   padding: 2rem;
-	display: flex;
-	flex-direction: column;
-	flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
-	strong {
+  strong {
     display: block;
     margin-top: 1rem;
     font-size: 2rem;
@@ -31,38 +33,37 @@ const SummaryCard = styled.div`
 `
 
 const Card = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	color: ${props => props.theme["gray-300"]};
-`  
-  
-export function Summary() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: ${(props) => props.theme['gray-300']};
+`
 
+export function Summary() {
   const { transactions } = useContext(TransactionsContext)
 
   const summary = transactions.reduce(
     (acc, transaction) => {
       if (transaction.type === 'income') {
-        acc.income += transaction.price;
-        acc.total += transaction.price;
+        acc.income += transaction.price
+        acc.total += transaction.price
       } else {
-        acc.outcome += transaction.price;
-        acc.total -= transaction.price;
+        acc.outcome += transaction.price
+        acc.total -= transaction.price
       }
 
-      return acc;
+      return acc
     },
     {
       income: 0,
       outcome: 0,
       total: 0,
     },
-  );
+  )
 
   return (
     <SummaryContainer>
-      <SummaryCard >
+      <SummaryCard>
         <Card>
           <span>Entradas</span>
           <ArrowCircleUp size={32} color="#00b37e" />

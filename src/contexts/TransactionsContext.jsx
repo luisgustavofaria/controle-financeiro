@@ -1,10 +1,10 @@
-import { createContext, useEffect, useState } from 'react';
-import { api } from '../lib/axios';
+import { createContext, useEffect, useState } from 'react'
+import { api } from '../lib/axios'
 
-export const TransactionsContext = createContext({});
+export const TransactionsContext = createContext({})
 
 export function TransactionsProvider({ children }) {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState([])
 
   async function fetchTransactions(query) {
     const response = await api.get('transactions', {
@@ -12,14 +12,14 @@ export function TransactionsProvider({ children }) {
         _sort: 'createdAt',
         _order: 'desc',
         q: query,
-      }
+      },
     })
 
     setTransactions(response.data)
   }
 
   async function createTransaction(data) {
-    const { description, price, category, type } = data;
+    const { description, price, category, type } = data
 
     const response = await api.post('transactions', {
       description,
@@ -27,22 +27,24 @@ export function TransactionsProvider({ children }) {
       category,
       type,
       createdAt: new Date(),
-    });
+    })
 
-    setTransactions(state => [response.data, ...state])
+    setTransactions((state) => [response.data, ...state])
   }
 
   useEffect(() => {
     fetchTransactions()
-  }, []);
+  }, [])
 
   return (
-    <TransactionsContext.Provider value={{
-      transactions,
-      fetchTransactions,
-      createTransaction
-    }}>
+    <TransactionsContext.Provider
+      value={{
+        transactions,
+        fetchTransactions,
+        createTransaction,
+      }}
+    >
       {children}
     </TransactionsContext.Provider>
-  );
+  )
 }

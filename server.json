@@ -31,6 +31,22 @@
       "type": "outcome",
       "createdAt": "2023-02-07T14:21:57.762Z",
       "id": 4
+    },
+    {
+      "description": "sapato",
+      "price": 400,
+      "category": "aniversario",
+      "type": "outcome",
+      "createdAt": "2023-02-07T22:37:41.742Z",
+      "id": 5
+    },
+    {
+      "description": "salario Luis",
+      "price": 3850,
+      "category": "salario",
+      "type": "income",
+      "createdAt": "2023-02-07T22:38:24.330Z",
+      "id": 6
     }
   ]
 }

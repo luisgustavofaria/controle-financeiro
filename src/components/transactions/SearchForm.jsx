@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { MagnifyingGlass } from "phosphor-react";
+import { MagnifyingGlass } from 'phosphor-react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const SearchFormContainer = styled.form`
   display: flex;
@@ -29,8 +32,14 @@ const SearchFormContainer = styled.form`
     color: ${props => props.theme["green-300"]};
     font-weight: bold;
     border-radius: 6px;
+    cursor: pointer;
     
-    :hover {
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    &:not(:disabled):hover {
       background: ${props => props.theme["green-500"]};
       border-color: ${props => props.theme["green-500"]};
       color: ${props => props.theme["white"]};
@@ -39,12 +48,31 @@ const SearchFormContainer = styled.form`
   }
 `
 
-export function SearchForm() {
-  return (
-    <SearchFormContainer>
-      <input type="text" placeholder="Busque por transações" />
+const searchFormSchema = z.object({
+  query: z.string(),
+});
 
-      <button type="submit">
+export function SearchForm() {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm({
+    resolver: zodResolver(searchFormSchema),
+  });
+
+  async function handleSearchTransactions() {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    
+  }
+
+  return (
+    <SearchFormContainer onSubmit={handleSubmit(handleSearchTransactions)}>
+      <input type="text" placeholder="Busque por transações" {...register('query')} />
+
+      <button type="submit" disabled={isSubmitting}>
         <MagnifyingGlass size={20} />
         Buscar
       </button>

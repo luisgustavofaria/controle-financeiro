@@ -2,6 +2,9 @@ import styled from "styled-components";
 import * as Dialog from '@radix-ui/react-dialog';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { ArrowCircleDown, ArrowCircleUp, X } from "phosphor-react";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
@@ -47,7 +50,13 @@ export const Content = styled(Dialog.Content)`
       border-radius: 6px;
       margin-top: 1.25rem;
       cursor: pointer;
-      &:hover {
+      
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      &:not(:disabled):hover {
         background: ${props => props.theme["green-700"]};
         transition: background-color 0.2s;
       }
@@ -102,39 +111,77 @@ export const TransactionTypeButton = styled(RadioGroup.Item)`
   }
 `;
 
+const newTransactionFormSchema = z.object({
+  description: z.string(),
+  price: z.number(),
+  category: z.string(),
+  // type: z.enum(['income', 'outcome']),
+});
+
 export function NewTransactionModal() {
-    return (
-      <Dialog.Portal>
-        <Overlay />
-  
-        <Content>
-          <Dialog.Title>Nova Transação</Dialog.Title>
-  
-          <CloseButton>
-            <X size={24} />
-          </CloseButton>
-  
-          <form>
-            <input type="text" placeholder="Descrição" required />
-            <input type="number" placeholder="Preço" required />
-            <input type="text" placeholder="Categoria" required />
 
-            <TransactionType>
-                <TransactionTypeButton variant="income" value="income">
-                    <ArrowCircleUp size={24} />
-                    Entrada
-                </TransactionTypeButton>
-                <TransactionTypeButton variant="outcome" value="outcome">
-                    <ArrowCircleDown size={24} />
-                    Saída
-                </TransactionTypeButton>
-            </TransactionType>
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm({
+    resolver: zodResolver(newTransactionFormSchema),
+  })
 
-            <button type="submit">
-              Cadastrar
-            </button>
-          </form>
-        </Content>
-      </Dialog.Portal>
-    );
+  async function handleCreateNewTransaction() {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    
+  }
+
+  return (
+    <Dialog.Portal>
+      <Overlay />
+
+      <Content>
+        <Dialog.Title>Nova Transação</Dialog.Title>
+
+        <CloseButton>
+          <X size={24} />
+        </CloseButton>
+
+        <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
+          <input
+            type="text"
+            placeholder="Descrição"
+            required
+            {...register('description')}
+          />
+          <input
+            type="number"
+            placeholder="Preço"
+            required
+            {...register('price', { valueAsNumber: true })}
+          />
+          <input
+            type="text"
+            placeholder="Categoria"
+            required
+            {...register('category')}
+          />
+
+          <TransactionType>
+              <TransactionTypeButton variant="income" value="income">
+                  <ArrowCircleUp size={24} />
+                  Entrada
+              </TransactionTypeButton>
+              <TransactionTypeButton variant="outcome" value="outcome">
+                  <ArrowCircleDown size={24} />
+                  Saída
+              </TransactionTypeButton>
+          </TransactionType>
+
+          <button type="submit" disabled={isSubmitting}>
+            Cadastrar
+          </button>
+        </form>
+      </Content>
+    </Dialog.Portal>
+  );
   }

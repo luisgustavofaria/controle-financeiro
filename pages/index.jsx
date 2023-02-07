@@ -7,8 +7,8 @@ export default function HomePage(){
 
 	return (
 		<div>
-			<Header />
       <TransactionsProvider>
+				<Header />
 			  <Summary />
         <Transactions />
       </TransactionsProvider>

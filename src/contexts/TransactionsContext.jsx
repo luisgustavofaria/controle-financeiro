@@ -1,5 +1,5 @@
+import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
-import { api } from '../lib/axios'
 
 export const TransactionsContext = createContext({})
 
@@ -7,13 +7,16 @@ export function TransactionsProvider({ children }) {
   const [transactions, setTransactions] = useState([])
 
   async function fetchTransactions(query) {
-    const response = await api.get('/transactions', {
-      params: {
-        _sort: 'createdAt',
-        _order: 'desc',
-        q: query,
+    const response = await axios.get(
+      'https://luisgustavofaria-json-server-controle-financeiro-teste.vercel.app/transactions',
+      {
+        params: {
+          _sort: 'createdAt',
+          _order: 'desc',
+          q: query,
+        },
       },
-    })
+    )
 
     setTransactions(response.data)
   }
@@ -21,13 +24,16 @@ export function TransactionsProvider({ children }) {
   async function createTransaction(data) {
     const { description, price, category, type } = data
 
-    const response = await api.post('/transactions', {
-      description,
-      price,
-      category,
-      type,
-      createdAt: new Date(),
-    })
+    const response = await axios.post(
+      'https://luisgustavofaria-json-server-controle-financeiro-teste.vercel.app/transactions',
+      {
+        description,
+        price,
+        category,
+        type,
+        createdAt: new Date(),
+      },
+    )
 
     setTransactions((state) => [response.data, ...state])
   }

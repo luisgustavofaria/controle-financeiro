@@ -7,7 +7,7 @@ export function TransactionsProvider({ children }) {
   const [transactions, setTransactions] = useState([])
 
   async function fetchTransactions(query) {
-    const response = await api.get('transactions', {
+    const response = await api.get('/transactions', {
       params: {
         _sort: 'createdAt',
         _order: 'desc',
@@ -21,7 +21,7 @@ export function TransactionsProvider({ children }) {
   async function createTransaction(data) {
     const { description, price, category, type } = data
 
-    const response = await api.post('transactions', {
+    const response = await api.post('/transactions', {
       description,
       price,
       category,
